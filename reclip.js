@@ -8,7 +8,7 @@ let ammoTypes = [
         count: 7,
         clips: "jNLSVcVopKkmZcL3",
         bullets: "LiRObd9DxdqAJ7jj",
-        housing: null, // Unused at the moment, will contain mags/clips that are empty maybe?
+        housing: "YjAgkozywoiG6OpP", // Unused at the moment, will contain mags/clips that are empty maybe?
     },
 ]
 

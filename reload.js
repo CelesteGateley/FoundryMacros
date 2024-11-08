@@ -5,10 +5,11 @@ let player = game.actors.get("Cq113uhBgIjxCMhk");
 // Array of available weapons to be reloaded. Must include name, weapon, clips.
 let weapons = [
     {
-        name: "Bolt Action Rifle",  // Name of the weapon, can be anything you want
-        weapon: "HVClcimAEQEu9xDn", // ID of the weapon itself
-        clips: "jNLSVcVopKkmZcL3",  // ID of the clips/mags to reload from
-        bullets: "LiRObd9DxdqAJ7jj" // ID of individual bullets. Can be left out if unused rounds aren't returned
+        name: "Bolt Action Rifle",   // Name of the weapon, can be anything you want
+        weapon: "HVClcimAEQEu9xDn",  // ID of the weapon itself
+        clips: "jNLSVcVopKkmZcL3",   // ID of the clips/mags to reload from
+        bullets: "LiRObd9DxdqAJ7jj", // ID of individual bullets. Can be left out if unused rounds aren't returned
+        housing: "YjAgkozywoiG6OpP", // ID of the housing for bullets. Can be left out if you do not want magazines returned
     },
 ]
 
@@ -42,7 +43,7 @@ new Dialog({
     buttons: getButtons(),
 }).render(true);
 
-function reload(weapon, magazines, bullets = null) {
+function reload(weapon, magazines, bullets = null, housing = null) {
     // Check if the weapon is missing any charges
     if (weapon.system.uses.value < weapon.system.uses.max) {
         // Check if you have any mags to use
@@ -55,6 +56,9 @@ function reload(weapon, magazines, bullets = null) {
                 if (returned > 0) {
                     updateItem(bullets, "system.quantity", bullets.system.quantity + returned);
                 }
+            }
+            if (housing !== null) {
+                updateItem(housing, "system.quantity", housing.system.quantity + 1);
             }
 
             updateItem(weapon, "system.uses.value", weapon.system.uses.max);
